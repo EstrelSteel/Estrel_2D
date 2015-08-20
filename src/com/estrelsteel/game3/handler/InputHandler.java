@@ -27,6 +27,11 @@ public class InputHandler implements KeyListener {
 	}
 	
 	public void systemUp(boolean on) {
+		if(game.openChat != null) {
+			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
+				return;
+			}
+		}
 		if(on) {
 			if(game.options.isOpen()) {
 				if(game.options.getSelectNum() > 0) {
@@ -48,6 +53,11 @@ public class InputHandler implements KeyListener {
 	}
 	
 	public void systemDown(boolean on) {
+		if(game.openChat != null) {
+			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
+				return;
+			}
+		}
 		if(on) {
 			if(game.options.isOpen()) {
 				if(game.options.getSelectNum() < game.options.getMaxSelectNum() - 1) {
@@ -69,6 +79,11 @@ public class InputHandler implements KeyListener {
 	}
 	
 	public void systemRight(boolean on) {
+		if(game.openChat != null) {
+			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
+				return;
+			}
+		}
 		if(on) {
 			game.player.setGoRIGHT(true);
 			if(game.tutorial) {
@@ -84,6 +99,11 @@ public class InputHandler implements KeyListener {
 	}
 	
 	public void systemLeft(boolean on) {
+		if(game.openChat != null) {
+			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
+				return;
+			}
+		}
 		if(on) {
 			game.player.setGoLEFT(true);
 			if(game.tutorial) {
@@ -114,6 +134,11 @@ public class InputHandler implements KeyListener {
 			systemLeft(true);
 			break;
 		case 32: /* SPACE */
+			if(game.openChat != null) {
+				if(game.openChat.isOpen()) {
+					game.openChat.switchOpen();
+				}
+			}
 			if(game.options.isOpen()) {
 				int select = game.options.getSelectNum();
 				MenuItems items = game.options.getMenuItems().get(select);

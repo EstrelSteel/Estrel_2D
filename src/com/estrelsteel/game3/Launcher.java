@@ -16,7 +16,6 @@ public class Launcher extends Applet {
 	
 	@Override
 	public void init() {
-		
 		setLayout(new BorderLayout());
 		add(game, BorderLayout.CENTER);
 		setFocusable(true);
