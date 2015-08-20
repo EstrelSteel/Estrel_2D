@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.estrelsteel.game3.block.Exit;
 import com.estrelsteel.game3.block.Image;
@@ -26,6 +27,7 @@ import com.estrelsteel.game3.music.Music;
 import com.estrelsteel.game3.music.Volume;
 import com.estrelsteel.game3.world.World;
 import com.estrelsteel.game3.character.Player;
+import com.estrelsteel.game3.chatbox.ChatBox;
 import com.estrelsteel.game3.event.map.MapAlter;
 import com.estrelsteel.game3.event.map.MapChange;
 import com.estrelsteel.game3.event.player.health.PlayerDamage;
@@ -127,6 +129,9 @@ public class Game extends Canvas implements Runnable {
 	
 	private Thread thread; 
 	
+	public ArrayList<ChatBox> chatMsg = new ArrayList<ChatBox>();
+	public ChatBox openChat;
+	
 	public Game() {
 		input = new InputHandler(this);
 		mouse = new MouseHandler(this);
@@ -181,6 +186,10 @@ public class Game extends Canvas implements Runnable {
 		downArrow.loadImage();
 		rightArrow.loadImage();
 		leftArrow.loadImage();
+		
+		ChatBox chat = new ChatBox("Hello, World! 123", 20, 80, 40, 60);
+		chat.setOpen(false);
+		chatMsg.add(chat);
 	}
 	
 	public synchronized void start() {
@@ -495,6 +504,12 @@ public class Game extends Canvas implements Runnable {
 					player.setX(exit.getEnterX());
 					player.setY(exit.getEnterY());
 					
+				}
+			}
+			for(ChatBox chat : chatMsg) {
+				if(chat.isOpen()) {
+					ctx = chat.getGraphics(ctx);
+					openChat = chat;
 				}
 			}
 		}
