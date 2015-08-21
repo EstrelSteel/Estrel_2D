@@ -42,14 +42,14 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 				}
 				else {
 					game.errorClick = game.errorClick + 1;
-					game.error = Error.WRONG_MAT;
+					game.error = Error.NULL;
 				}
 				
 				game.world.setSelectedMap(map);
 			}
 			else {
 				game.errorClick = game.errorClick + 1;
-				game.error = Error.LACK_POW;
+				game.error = Error.NULL;
 			}
 		}
 		//CHECK IF PLAYER CLICKED ON SCREEN ARROWS
@@ -87,14 +87,14 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 				}
 				else {
 					game.errorClick = game.errorClick + 1;
-					game.error = Error.WRONG_MAT;
+					game.error = Error.NULL;
 				}
 				
 				game.world.setSelectedMap(map);
 			}
 			else {
 				game.errorClick = game.errorClick + 1;
-				game.error = Error.MAXED_POW;
+				game.error = Error.NULL;
 			}
 		}
 	}

@@ -89,7 +89,7 @@ public class Game extends Canvas implements Runnable {
 	public static int HEIGHT = 400;
 	public static Dimension dimension = new Dimension((int) (WIDTH * Game.SCALE), (int) (HEIGHT * Game.SCALE));
 	
-	public Image upperMenu = new Image("/com/estrelsteel/game3/res/hud/upperMenu.png");
+	public Image upperMenu = new Image("/com/estrelsteel/game3/res/logo/logo.png");
 	
 	public int errorY = 2;
 	public Error error = Error.NULL;
@@ -97,30 +97,16 @@ public class Game extends Canvas implements Runnable {
 	public boolean tutorial = true;
 	public boolean errorActive = true;
 	
-	public Image upArrow = new Image("/com/estrelsteel/game3/res/hud/up_arrow_white.png");
-	public Image downArrow = new Image("/com/estrelsteel/game3/res/hud/down_arrow_white.png");
-	public Image rightArrow = new Image("/com/estrelsteel/game3/res/hud/right_arrow_white.png");
-	public Image leftArrow = new Image("/com/estrelsteel/game3/res/hud/left_arrow_white.png");
+	public Image upArrow = new Image("/com/estrelsteel/game3/res/logo/logo.png");
+	public Image downArrow = new Image("/com/estrelsteel/game3/res/logo/logo.png");
+	public Image rightArrow = new Image("/com/estrelsteel/game3/res/logo/logo.png");
+	public Image leftArrow = new Image("/com/estrelsteel/game3/res/logo/logo.png");
 	
 	public World world = new World(this);
-	public Image devMap1Image = new Image("/com/estrelsteel/game3/res/map/map1.png");
-	public Image devMap1Collide = new Image("/com/estrelsteel/game3/res/map/map1.png");
-	public Map devMap1 = new Map(this, devMap1Collide, devMap1Image, "dev_map1", true, true, 250, 250, 1500, 1500, world);
-	public Image devMap2Image = new Image("/com/estrelsteel/game3/res/map/map2.png");
-	public Image devMap2Collide = new Image("/com/estrelsteel/game3/res/map/map2.png");;
-	public Map devMap2 = new Map(this, devMap2Collide, devMap2Image, "dev_map2", true, true, 250, 250, 1500, 1500, world);
 	
-	public Image map1Collide = new Image("/com/estrelsteel/game3/res/map/over1/map1-collide.png");
-	public Image map1Image = new Image("/com/estrelsteel/game3/res/map/over1/map1-real.png");;
+	public Image map1Collide = new Image("/com/estrelsteel/game3/res/logo/Estrelsteel.png");
+	public Image map1Image = new Image("/com/estrelsteel/game3/res/logo/Estrelsteel.png");;
 	public Map map1 = new Map(this, map1Collide, map1Image, "map1", true, true, 250, 250, 1500, 1500, world);
-	
-	public Image temple1_r1_Collide = new Image("/com/estrelsteel/game3/res/map/temple1/temple1_r1_collide.png");
-	public Image temple1_r1_Image = new Image("/com/estrelsteel/game3/res/map/temple1/temple1_r1_real.png");;
-	public Map temple1_r1 = new Map(this, temple1_r1_Collide, temple1_r1_Image, "temple1_r1", true, true, 750, 1250, 1500, 1500, world);
-	
-	public Image temple1_r2_Collide = new Image("/com/estrelsteel/game3/res/map/temple1/temple1_r2_collide.png");
-	public Image temple1_r2_Image = new Image("/com/estrelsteel/game3/res/map/temple1/temple1_r2_real.png");;
-	public Map temple1_r2 = new Map(this, temple1_r2_Collide, temple1_r2_Image, "temple1_r2", true, true, 300, 300, 1500, 1500, world);
 	
 	public Music music;
 	
@@ -151,37 +137,24 @@ public class Game extends Canvas implements Runnable {
 		mapAlter.addMapAlterListener(mapHandler);
 		
 		
-		Image ground = new Image("/com/estrelsteel/game3/res/map/temple1/temple1_ground.png");
-		Image wall = new Image("/com/estrelsteel/game3/res/map/temple1/temple1_wall.png");
-		Image background = new Image("/com/estrelsteel/game3/res/map/over1/map1-background.png");
-		map1.addExits(new Exit(temple1_r1, new Location(world, 880, 1180, 300, 20)));
+		Image ground = new Image("/com/estrelsteel/game3/res/logo/logo.png");
+		Image wall = new Image("/com/estrelsteel/game3/res/logo/logo.png");
+		Image background = new Image("/com/estrelsteel/game3/res/logo/logo.png");
+		map1.addExits(new Exit(map1, new Location(world, 880, 1180, 300, 20)));
 		map1.setBackgroundImage(background);
+		map1.setGroundImage(ground);
+		map1.setWallImage(wall);
 		world.addMap(map1);
-		
-		temple1_r1.addExits(new Exit(map1, new Location(world, 500, 1350, 500, 40), 1000, 1250));
-		temple1_r1.addExits(new Exit(temple1_r2, new Location(world, 650, 750, 200, 200)));
-		temple1_r1.setGroundImage(ground);
-		temple1_r1.setWallImage(wall);
-		world.addMap(temple1_r1);
-		
-		temple1_r2.addExits(new Exit(temple1_r1, new Location(world, 100, 100, 300, 40), 750, 650));
-		temple1_r2.setGroundImage(ground);
-		temple1_r2.setWallImage(wall);
-		world.addMap(temple1_r2);
-		
-		world.addMap(devMap1);
-		world.addMap(devMap2);
-		world.addCharacter(player);
 		
 		world.resetPos();
 		world.getSelectedMap().getPlayerMap().loadImage();
 		upperMenu.loadImage();
 		
-		error = Error.TUTORIAL_MOVE;
+		error = Error.UNKOWN;
 		errorActive = true;
-		music = Music.ELEMENTS_THEME_SAX;
-		music.vol = Volume.MUTE;
-		music.play();
+		//music = Music.TEST_WAV;
+		//music.vol = Volume.MUTE;
+		//music.play();
 		
 		upArrow.loadImage();
 		downArrow.loadImage();
@@ -517,6 +490,10 @@ public class Game extends Canvas implements Runnable {
 					}
 					if(loc.getX() + loc.getW() > player.getX() && loc.getX() < player.getX() && loc.getY() + loc.getH() > player.getY() && loc.getY() < player.getY() && chat.isOn()) {
 						chat.getChat().setOpen(true);
+						input.systemUp(false);
+						input.systemDown(false);
+						input.systemLeft(false);
+						input.systemRight(false);
 						if(chat.isTurnOff()) {
 							chat.setOn(false);
 						}

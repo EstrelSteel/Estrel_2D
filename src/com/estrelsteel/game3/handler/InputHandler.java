@@ -30,7 +30,7 @@ public class InputHandler implements KeyListener {
 	public void systemUp(boolean on) {
 		if(game.openChat != null) {
 			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
-				return;
+				on = false;
 			}
 		}
 		if(on) {
@@ -42,7 +42,7 @@ public class InputHandler implements KeyListener {
 			}
 			game.player.setGoUP(true);
 			if(game.tutorial) {
-				if(game.errorActive && game.error == Error.TUTORIAL_MOVE) {
+				if(game.errorActive && game.error == Error.NULL) {
 					game.errorActive = false;
 					game.error = Error.UNKOWN;
 				}
@@ -56,7 +56,7 @@ public class InputHandler implements KeyListener {
 	public void systemDown(boolean on) {
 		if(game.openChat != null) {
 			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
-				return;
+				on = false;
 			}
 		}
 		if(on) {
@@ -68,7 +68,7 @@ public class InputHandler implements KeyListener {
 			}
 			game.player.setGoDOWN(true);
 			if(game.tutorial) {
-				if(game.errorActive && game.error == Error.TUTORIAL_MOVE) {
+				if(game.errorActive && game.error == Error.NULL) {
 					game.errorActive = false;
 					game.error = Error.UNKOWN;
 				}
@@ -82,13 +82,13 @@ public class InputHandler implements KeyListener {
 	public void systemRight(boolean on) {
 		if(game.openChat != null) {
 			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
-				return;
+				on = false;
 			}
 		}
 		if(on) {
 			game.player.setGoRIGHT(true);
 			if(game.tutorial) {
-				if(game.errorActive && game.error == Error.TUTORIAL_MOVE) {
+				if(game.errorActive && game.error == Error.NULL) {
 					game.errorActive = false;
 					game.error = Error.UNKOWN;
 				}
@@ -102,13 +102,13 @@ public class InputHandler implements KeyListener {
 	public void systemLeft(boolean on) {
 		if(game.openChat != null) {
 			if(game.openChat.isOpen() && game.openChat.isFreeze()) {
-				return;
+				on = false;
 			}
 		}
 		if(on) {
 			game.player.setGoLEFT(true);
 			if(game.tutorial) {
-				if(game.errorActive && game.error == Error.TUTORIAL_MOVE) {
+				if(game.errorActive && game.error == Error.NULL) {
 					game.errorActive = false;
 					game.error = Error.UNKOWN;
 				}

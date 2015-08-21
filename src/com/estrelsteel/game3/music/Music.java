@@ -10,9 +10,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public enum Music {
-	TEST_WAV("/com/estrelsteel/game3/res/music/testSound.wav"),
-	ELEMENTS_THEME_BASS("/com/estrelsteel/game3/res/music/ElementsThemeBass.wav"),
-	ELEMENTS_THEME_SAX("/com/estrelsteel/game3/res/music/ElementsThemeSax.wav");
+	TEST_WAV("/com/estrelsteel/game3/res/music/testSound.wav");
 	
 	public Volume vol = Volume.LOW;
 	
