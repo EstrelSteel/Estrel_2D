@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.estrelsteel.game3.Game;
 import com.estrelsteel.game3.block.Map;
+import com.estrelsteel.game3.chatbox.ChatBox;
 import com.estrelsteel.game3.item.Item;
 import com.estrelsteel.game3.location.Location;
 import com.estrelsteel.game3.menu.MenuItems;
@@ -137,6 +138,12 @@ public class InputHandler implements KeyListener {
 			if(game.openChat != null) {
 				if(game.openChat.isOpen()) {
 					game.openChat.switchOpen();
+					ChatBox chain = game.openChat.getChain();
+					if(chain == null) {
+						break;
+					}
+					game.openChat = chain;
+					chain.switchOpen();
 				}
 			}
 			if(game.options.isOpen()) {

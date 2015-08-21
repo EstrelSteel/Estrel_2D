@@ -28,6 +28,7 @@ import com.estrelsteel.game3.music.Volume;
 import com.estrelsteel.game3.world.World;
 import com.estrelsteel.game3.character.Player;
 import com.estrelsteel.game3.chatbox.ChatBox;
+import com.estrelsteel.game3.chatbox.ChatTrigger;
 import com.estrelsteel.game3.event.map.MapAlter;
 import com.estrelsteel.game3.event.map.MapChange;
 import com.estrelsteel.game3.event.player.health.PlayerDamage;
@@ -129,7 +130,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private Thread thread; 
 	
-	public ArrayList<ChatBox> chatMsg = new ArrayList<ChatBox>();
+	public ArrayList<ChatTrigger> chatMsg = new ArrayList<ChatTrigger>();
 	public ChatBox openChat;
 	
 	public Game() {
@@ -189,7 +190,8 @@ public class Game extends Canvas implements Runnable {
 		
 		ChatBox chat = new ChatBox("Hello, World! 123", 20, 80, 40, 60);
 		chat.setOpen(false);
-		chatMsg.add(chat);
+		ChatTrigger trigChat = new ChatTrigger(chat, map1, 240, 240, 20, 20);
+		chatMsg.add(trigChat);
 	}
 	
 	public synchronized void start() {
@@ -506,10 +508,23 @@ public class Game extends Canvas implements Runnable {
 					
 				}
 			}
-			for(ChatBox chat : chatMsg) {
-				if(chat.isOpen()) {
-					ctx = chat.getGraphics(ctx);
-					openChat = chat;
+			ctx.setColor(Color.RED);
+			for(ChatTrigger chat : chatMsg) {
+				if(chat.getMap() == world.getSelectedMap()) {
+					Location loc = new Location(chat.getWorld(), chat.getX(), chat.getY(), chat.getW(), chat.getH());
+					if(DEBUG) {
+						ctx.fillRect(loc.getX() + mapX, loc.getY() + mapY, (int) loc.getW(), (int) loc.getH());
+					}
+					if(loc.getX() + loc.getW() > player.getX() && loc.getX() < player.getX() && loc.getY() + loc.getH() > player.getY() && loc.getY() < player.getY() && chat.isOn()) {
+						chat.getChat().setOpen(true);
+						if(chat.isTurnOff()) {
+							chat.setOn(false);
+						}
+					}
+					if(chat.getChat().isOpen()) {
+						ctx = chat.getChat().getGraphics(ctx);
+						openChat = chat.getChat();
+					}
 				}
 			}
 		}
