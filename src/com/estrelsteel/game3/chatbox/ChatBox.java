@@ -69,6 +69,10 @@ public class ChatBox extends Location {
 		return ctx;
 	}
 	
+	public ChatBox getChain() {
+		return chain;
+	}
+	
 	public boolean isOpen() {
 		return open;
 	}
@@ -118,6 +122,11 @@ public class ChatBox extends Location {
 	
 	public void setFreeze(boolean freeze) {
 		this.freeze = freeze;
+		return;
+	}
+	
+	public void setChain(ChatBox chain) {
+		this.chain = chain;
 		return;
 	}
 
